@@ -16,7 +16,7 @@
     "reactn-devtools": "^1.1.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
-    "reinstate": "^0.1.1",
+    "reinspect": "^1.0.2",
     "semantic-ui-react": "^0.88.1",
     "styled-components": "^4.4.1"
   },
