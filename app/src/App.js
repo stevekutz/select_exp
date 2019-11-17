@@ -24,11 +24,23 @@ const App = () => {
     { value: 3, label: "High"}
   ];
 
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      borderBottom: '1px dotted pink',
+      color: state.isSelected ? 'red' : 'blue',
+      padding: 20,
+    }),
+    control: () => ({
+      // none of react-select's styles are passed to <Control />
+      width: '200px',
+    })}
 
   return (
     <div >
       <form>
         <Select 
+          styles = {customStyles}
           name = "myDropDown"
           value = {options.filter(({value}) => value === dropDownVal.selectedKey)}
           getOptionLabel={({ label }) => label}
