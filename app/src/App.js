@@ -27,18 +27,25 @@ const App = () => {
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
-      borderBottom: '1px dotted pink',
+      border: '1px solid blue',
+      borderBottom: '5px dotted pink',
       color: state.isSelected ? 'red' : 'blue',
+      fontWeight: state.isSelected ? 'bolder' : 'lighter',
+      color: state.isFocused ? 'black' : 'darkslategray',
+      fontWeight: state.isFocused ? 'bolder' : 'lighter',
+
       padding: 20,
     }),
-    control: () => ({
-      // none of react-select's styles are passed to <Control />
-      width: '200px',
-    })}
+    //  this makes a lable on top and removes dropdown box
+    // control: () => ({
+    //   // none of react-select's styles are passed to <Control />
+    //   width: '200px',
+    // })
+  }
 
   return (
     <div >
-      <form>
+      <form style = {{width: '40%'}}>
         <Select 
           styles = {customStyles}
           name = "myDropDown"
