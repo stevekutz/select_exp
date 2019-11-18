@@ -18,6 +18,15 @@ const App = () => {
     setDropDownVal(initial)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const [value, name] = e.target; 
+    console.log('value is ', value);
+
+    setDropArr([...dropArr,dropDownVal]);
+  }
+
   const options = [
     { value: 1, label: "Low" },
     { value: 2, label: "Medium" },
@@ -57,9 +66,10 @@ const App = () => {
         />
       
         <button value = "Reset dropdown" onClick = {resetDropDown}> Reset </button>
-      
+        <button type = 'select' onClick = {handleSubmit}> Submit </button>
       </form>
 
+      
 
     </div>
   );
