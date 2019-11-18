@@ -11,7 +11,7 @@ const App = () => {
   const [dropArr, setDropArr] = useState([], "DropArr")
 
   const updateDropDown = value => {
-    setDropDownVal({... dropDownVal, selectedKey: value});  
+    setDropDownVal({...dropDownVal, selectedKey: value});  
   }
 
   const resetDropDown = () => {
@@ -20,11 +20,14 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if(dropDownVal.selectedKey !== null) {
+      console.log('dropDownVal is ', dropDownVal.selectedKey);
+      // console.log('selectedKey', selectedKey);
+      setDropArr([...dropArr, [dropDownVal.selectedKey] ]);
+      resetDropDown();
+    }
 
-    const [value, name] = e.target; 
-    console.log('value is ', value);
-
-    setDropArr([...dropArr,dropDownVal]);
   }
 
   const options = [
@@ -52,6 +55,10 @@ const App = () => {
     // })
   }
 
+  useEffect(()=>{
+    console.log('dropArr is ', dropArr);
+  },[dropArr])
+
   return (
     <div >
       <form style = {{width: '40%'}}>
@@ -69,6 +76,17 @@ const App = () => {
         <button type = 'select' onClick = {handleSubmit}> Submit </button>
       </form>
 
+      <div> Dropdown selections : </div>
+      {dropArr.length
+        ? 
+          <div>
+            {dropArr.map((item, index) => (
+              <p key = {index}> {item}</p>
+            ))}         
+          </div>
+        : 
+          <p> No dropdown data yet</p>
+      }
       
 
     </div>
