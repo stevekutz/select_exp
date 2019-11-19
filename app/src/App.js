@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 // import logo from './logo.svg';
 import {useState} from 'reinspect';
 import Select from 'react-select';
+import {Button, Card, Container, Form, Grid, Input, Label} from 'semantic-ui-react';
 import './App.css';
 
 const App = () => {
@@ -23,7 +24,7 @@ const App = () => {
     
     if(dropDownVal.selectedKey !== null) {
       console.log('dropDownVal is ', dropDownVal.selectedKey);
-      // console.log('selectedKey', selectedKey);
+      console.log(' dropDownVal ', dropDownVal);
       setDropArr([...dropArr, [dropDownVal.selectedKey] ]);
       resetDropDown();
     }
@@ -31,9 +32,9 @@ const App = () => {
   }
 
   const options = [
-    { value: 1, label: "Low" },
-    { value: 2, label: "Medium" },
-    { value: 3, label: "High"}
+    { value: 'low', label: "Low" },
+    { value: 'medium', label: "Medium" },
+    { value: 'high', label: "High"}
   ];
 
   const customStyles = {
@@ -46,7 +47,7 @@ const App = () => {
       color: state.isFocused ? 'black' : 'darkslategray',
       fontWeight: state.isFocused ? 'bolder' : 'lighter',
 
-      padding: 20,
+      padding: '10px',
     }),
     //  this makes a lable on top and removes dropdown box
     // control: () => ({
@@ -60,8 +61,8 @@ const App = () => {
   },[dropArr])
 
   return (
-    <div >
-      <form style = {{width: '40%'}}>
+    <div style = {{border: '1px solid green'}}>
+      <form style = {{width: '20%'}}>
         <Select 
           styles = {customStyles}
           name = "myDropDown"
@@ -72,16 +73,16 @@ const App = () => {
           options={options}
         />
       
-        <button value = "Reset dropdown" onClick = {resetDropDown}> Reset </button>
-        <button type = 'select' onClick = {handleSubmit}> Submit </button>
+        <Button value = "Reset dropdown" onClick = {resetDropDown}> Reset </Button>
+        <Button type = 'select' onClick = {handleSubmit}> Submit </Button>
       </form>
 
-      <div> Dropdown selections : </div>
+      <Label style = {{margin: '3px'}}> Dropdown selections : </Label>
       {dropArr.length
         ? 
           <div>
             {dropArr.map((item, index) => (
-              <p key = {index}> {item}</p>
+              <Card key = {index}> {item}</Card>
             ))}         
           </div>
         : 
