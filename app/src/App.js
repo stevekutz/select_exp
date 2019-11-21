@@ -23,8 +23,9 @@ const App = () => {
 
   const [dropDownVal, setDropDownVal] = useState(initial, "DropDownValues")
   const [dropArr, setDropArr] = useState([], "DropArr")
-  const fuse = new Fuse(avengers, options);  
+  const fuse = new Fuse(dropArr, options);  
 
+  const [searchVal, searchValues] = useState('');
   let valuesFound = fuse.search(searchVal);
   let foundVals = valuesFound.length
 
