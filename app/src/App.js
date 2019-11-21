@@ -1,15 +1,32 @@
 import React, {useEffect} from 'react';
 // import logo from './logo.svg';
+import Fuse from 'fuse.js';
 import {useState} from 'reinspect';
 import Select from 'react-select';
 import {Button, Card, Container, Form, Grid, Input, Label} from 'semantic-ui-react';
 import './App.css';
+
+const options = {
+  shouldSort: true,
+  threshold: 0.5,
+  location:4,
+  distance: 10,
+  maxPatternLength: 12,
+  minMatchCharLength: 1,
+  keys: [
+    "name",
+  ]
+};
 
 const App = () => {
   const initial = {selectedKey: null};
 
   const [dropDownVal, setDropDownVal] = useState(initial, "DropDownValues")
   const [dropArr, setDropArr] = useState([], "DropArr")
+  const fuse = new Fuse(avengers, options);  
+
+  let valuesFound = fuse.search(searchVal);
+  let foundVals = valuesFound.length
 
   const updateDropDown = value => {
     setDropDownVal({...dropDownVal, selectedKey: value});  
