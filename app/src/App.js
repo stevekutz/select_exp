@@ -49,6 +49,16 @@ const App = () => {
 
   }
 
+  const handleChange = e => {
+    const {name, value} = e.target
+    searchValues(value);
+    console.log('value is ', value);
+
+    console.log('searchVal is ', searchVal);
+    console.log('valueFound ', valueFound);
+  }
+
+
   const options = [
     { value: 'low', label: "Low" },
     { value: 'medium', label: "Medium" },
@@ -79,7 +89,24 @@ const App = () => {
   },[dropArr])
 
   return (
-    <div style = {{border: '1px solid green'}}>
+    
+    <div  style = {{ border: `1px solid seagreen`, margin: `30px`, padding: `30px`}} >
+
+
+      <Card.Group centered itemsPerRow={2}>
+          <Card style = {{border: '1px solid brown', width: 'auto'}} >
+              <Card.Content>
+                  <Label style = {{lineHeight: `1.5`}}> Hooks + Fuse </Label>
+              </Card.Content>
+          </Card>    
+
+          <Card style = {{border: '1px solid brown', width: 'auto'}}  fluid >
+              <Card.Content>
+                  <Input type = 'text' placeholder = '...search' value = {searchVal} onChange = {handleChange}/>
+              </Card.Content>                
+          </Card>
+      </Card.Group>
+
       <form style = {{width: '20%'}}>
         <Select 
           styles = {customStyles}
