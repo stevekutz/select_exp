@@ -22,10 +22,11 @@ const App = () => {
   const initial = {selectedKey: null};
 
   const [dropDownVal, setDropDownVal] = useState(initial, "DropDownValues")
+  
   const [dropArr, setDropArr] = useState([], "DropArr")
   const fuse = new Fuse(dropArr, fuseOptions);  
-
   const [searchVal, searchValues] = useState('');
+  
   let valuesFound = fuse.search(searchVal);
   let foundVals = valuesFound.length
 
@@ -64,7 +65,7 @@ const App = () => {
     return (
         <Card key = {index} fluid>      
             <Card.Content key = {index}>     
-                <Label ribbon>  {val} </Label>                                 
+                <Label ribbon>  {val.name} </Label>                                 
             </Card.Content>
         </Card>
     ) 
@@ -137,10 +138,10 @@ const App = () => {
       </form>
 
       <Label style = {{margin: '3px'}}> Dropdown selections : </Label>
-      { foundLength
+      { valsFound.length
         ? 
             <Card.Group centered itemsPerRow={ foundLength || 1 }>
-            {dropArr.map((val, index) => (
+            {valsFound.map((val, index) => (
                             <Card key = {index}>
                                 <ValuesCard index = {index} val = {val}/>
                             </Card>
