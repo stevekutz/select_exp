@@ -6,7 +6,7 @@ import Select from 'react-select';
 import {Button, Card, Container, Form, Grid, Input, Label} from 'semantic-ui-react';
 import './App.css';
 
-const options = {
+const fuseOptions = {
   shouldSort: true,
   threshold: 0.5,
   location:4,
@@ -23,7 +23,7 @@ const App = () => {
 
   const [dropDownVal, setDropDownVal] = useState(initial, "DropDownValues")
   const [dropArr, setDropArr] = useState([], "DropArr")
-  const fuse = new Fuse(dropArr, options);  
+  const fuse = new Fuse(dropArr, fuseOptions);  
 
   const [searchVal, searchValues] = useState('');
   let valuesFound = fuse.search(searchVal);
@@ -43,7 +43,7 @@ const App = () => {
     if(dropDownVal.selectedKey !== null) {
       console.log('dropDownVal is ', dropDownVal.selectedKey);
       console.log(' dropDownVal ', dropDownVal);
-      setDropArr([...dropArr, [dropDownVal.selectedKey] ]);
+      setDropArr([...dropArr, {name: dropDownVal.selectedKey} ]);
       resetDropDown();
     }
 
@@ -55,9 +55,23 @@ const App = () => {
     console.log('value is ', value);
 
     console.log('searchVal is ', searchVal);
-    console.log('valueFound ', valueFound);
+    console.log('valueFound ', valuesFound);
+
   }
 
+  const ValuesCard = ({val, index}) => {
+   // const {id, name, nickname, description, thumbnail, img} = val;
+    return (
+        <Card key = {index} fluid>      
+            <Card.Content key = {index}>     
+                <Label ribbon>  {val} </Label>                                 
+            </Card.Content>
+        </Card>
+    ) 
+  } 
+
+  let valsFound = searchVal ? fuse.search(searchVal) : dropArr;
+  let foundLength = dropArr.length;
 
   const options = [
     { value: 'low', label: "Low" },
@@ -123,16 +137,19 @@ const App = () => {
       </form>
 
       <Label style = {{margin: '3px'}}> Dropdown selections : </Label>
-      {dropArr.length
+      { foundLength
         ? 
-          <div>
-            {dropArr.map((item, index) => (
-              <Card key = {index}> {item}</Card>
-            ))}         
-          </div>
-        : 
-          <p> No dropdown data yet</p>
-      }
+            <Card.Group centered itemsPerRow={ foundLength || 1 }>
+            {dropArr.map((val, index) => (
+                            <Card key = {index}>
+                                <ValuesCard index = {index} val = {val}/>
+                            </Card>
+                                            
+            ))}
+            </Card.Group>
+        :
+            null 
+    }    
       
 
     </div>
