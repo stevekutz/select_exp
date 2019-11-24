@@ -5,6 +5,7 @@ import {useState} from 'reinspect';
 import Select from 'react-select';
 import {Button, Card, Container, Form, Grid, Input, Label} from 'semantic-ui-react';
 import './App.css';
+import rawstates from './states.json'
 
 const fuseOptions = {
   shouldSort: true,
@@ -17,6 +18,19 @@ const fuseOptions = {
     "name",
   ]
 };
+
+let states = []
+
+rawstates.forEach(item => {
+  states.push(
+    {
+      value: item.name,
+      label: item.abbreviation  
+    }
+  )
+});
+
+console.log(states);
 
 const App = () => {
   const initial = {selectedKey: null};
