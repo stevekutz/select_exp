@@ -80,7 +80,14 @@ const App = () => {
         // const [name, value] = e.target;
         console.log('handleRadio value is ', value);
         setRadioChosen(value);
-
+        switch (value) {
+            case 'mlh':
+                setOptions(mlh);
+                break;
+            case 'states':
+                setOptions(states);
+                break;    
+        }
 
     }
 
