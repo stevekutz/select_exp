@@ -4,6 +4,7 @@ import Fuse from 'fuse.js';
 import {useState} from 'reinspect';
 import Select from 'react-select';
 import {Button, Card, Container, Form, Grid, Input, Label, Radio, FormField} from 'semantic-ui-react';
+import { Chip } from 'react-rainbow-components';
 import './App.css';
 import rawstates from './states.json'
 
@@ -167,9 +168,13 @@ const App = () => {
         </Card.Group>
 
         <Form>
+            <Chip 
+                label = { "Current dropdown array: " + radioChosen }
+            />
+
             <FormField>
                 <Radio
-                    label = "label field mlh"
+                    label = "Medium - Low - High"
                     name = "radioChoice"
                     value = 'mlh'
                     checked = {radioChosen === 'mlh'}
@@ -179,7 +184,7 @@ const App = () => {
             </FormField>
             <FormField>
                 <Radio
-                    label = "label field states"
+                    label = "U.S. States"
                     name = "radioChoice"
                     value = 'states'
                     checked = {radioChosen === 'states'}
@@ -225,51 +230,3 @@ const App = () => {
 
 export default App;
 
-
-/*
-        <Form>
-          <FormField>
-            <Radio
-              label = "label field mlh"
-              name = "radioChoice"
-              value = 'mlb'
-              checked
-              onChange = {handleRadio}
-            />
-          </FormField>
-
-          <FormField>
-            <Radio
-              label = "label field states"
-              name = "radioChoice"
-              value = 'states'
-              onChange = {handleRadio}
-            />
-          </FormField>        
-        </Form>
-
-*/
-
-/*
-            <Form>
-                <FormField>
-                    <Radio
-                        label = "label field mlh"
-                        name = "radioChoice"
-                        value = 'mlb'
-                        // onClick = { () => setChecked(!checked)}
-                        onChange = {handleRadio}
-                    />
-                </FormField>
-
-                <FormField>
-                    <Radio
-                        label = "label field states"
-                        name = "radioChoice"
-                        value = 'states'
-                        // onClick = { () => setChecked(!checked)}
-                        onChange = {handleRadio}
-                    />
-                </FormField>        
-            </Form>
-*/
