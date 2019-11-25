@@ -88,11 +88,13 @@ const App = () => {
   let valsFound = searchVal ? fuse.search(searchVal) : dropArr;
   let foundLength = dropArr.length;
 
-  const options = [
-    { value: 'low', label: "Low" },
-    { value: 'medium', label: "Medium" },
-    { value: 'high', label: "High"}
-  ];
+  // const options = [
+  //   { value: 'low', label: "Low" },
+  //   { value: 'medium', label: "Medium" },
+  //   { value: 'high', label: "High"}
+  // ];
+
+  const options = states;
 
   const customStyles = {
     option: (provided, state) => ({
