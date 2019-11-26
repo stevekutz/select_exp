@@ -6,7 +6,10 @@ import Select from 'react-select';
 import {Button, Card, Container, Form, Grid, Input, Label, Radio, FormField} from 'semantic-ui-react';
 import { Chip } from 'react-rainbow-components';
 import './App.css';
-import rawstates from './states.json'
+
+import ValuesCard from './components/ValuesCard';
+import states from './data/states';
+import mlh from './data/med_low_high';
 
 const fuseOptions = {
   shouldSort: true,
@@ -20,25 +23,6 @@ const fuseOptions = {
   ]
 };
 
-let states = []
-
-rawstates.forEach(item => {
-  states.push(
-    {
-      value: item.name,
-      label: item.abbreviation  
-    }
-  )
-});
-
-console.log(states);
-
-
-const mlh = [
-  { value: 'low', label: "Low" },
-  { value: 'medium', label: "Medium" },
-  { value: 'high', label: "High"}
-];
 
 let options = mlh;
 
@@ -103,27 +87,20 @@ const App = () => {
 
     }
 
-    const ValuesCard = ({val, index}) => {
-    // const {id, name, nickname, description, thumbnail, img} = val;
-        return (
-            <Card key = {index} fluid>      
-                <Card.Content key = {index}>     
-                    <Label ribbon>  {val.name} </Label>                                 
-                </Card.Content>
-            </Card>
-        ) 
-    } 
+    // const ValuesCard = ({val, index}) => {
+    // // const {id, name, nickname, description, thumbnail, img} = val;
+    //     return (
+    //         <Card key = {index} fluid>      
+    //             <Card.Content key = {index}>     
+    //                 <Label ribbon>  {val.name} </Label>                                 
+    //             </Card.Content>
+    //         </Card>
+    //     ) 
+    // } 
 
-  let valsFound = searchVal ? fuse.search(searchVal) : dropArr;
-  let foundLength = dropArr.length;
+    let valsFound = searchVal ? fuse.search(searchVal) : dropArr;
+    let foundLength = dropArr.length;
 
-  // const options = [
-  //   { value: 'low', label: "Low" },
-  //   { value: 'medium', label: "Medium" },
-  //   { value: 'high', label: "High"}
-  // ];
-
-  // const options = states;
 
     const customStyles = {
         option: (provided, state) => ({
@@ -178,7 +155,6 @@ const App = () => {
                     name = "radioChoice"
                     value = 'mlh'
                     checked = {radioChosen === 'mlh'}
-                    // onClick = { () => setChecked(!checked)}
                     onChange = {handleRadio}
                 />
             </FormField>
@@ -188,7 +164,6 @@ const App = () => {
                     name = "radioChoice"
                     value = 'states'
                     checked = {radioChosen === 'states'}
-                    // onClick = { () => setChecked(!checked)}
                     onChange = {handleRadio}
                 />
             </FormField>        
