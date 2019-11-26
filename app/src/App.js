@@ -3,13 +3,18 @@ import React, {useEffect} from 'react';
 import Fuse from 'fuse.js';
 import {useState} from 'reinspect';
 import Select from 'react-select';
-import {Button, Card, Container, Form, Grid, Input, Label, Radio, FormField} from 'semantic-ui-react';
+import {Button, Card, Container, Content, Form, Grid, Header, Input, Label, Radio, Segment} from 'semantic-ui-react';
 import { Chip } from 'react-rainbow-components';
 import './App.css';
 
 import ValuesCard from './components/ValuesCard';
-import states from './data/states';
-import mlh from './data/med_low_high';
+
+//      import data arrays method 1
+// import states from './data/states';
+// import mlh from './data/med_low_high';
+
+//      import data arrays method 2
+import {states, mlh} from './data/array_data';
 
 const fuseOptions = {
   shouldSort: true,
@@ -28,7 +33,7 @@ let options = mlh;
 
 const App = () => {
     const initial = {selectedKey: null};
-    const [checked, setChecked] = useState(true, "RadioSelected");
+    // const [checked, setChecked] = useState(true, "RadioSelected");
     const [options, setOptions] = useState(mlh, "Options Array") 
 
     const [radioChosen, setRadioChosen] = useState( 'mlh', "RadioChoice")
@@ -45,7 +50,9 @@ const App = () => {
         setDropDownVal({...dropDownVal, selectedKey: value});  
     }
 
-    const resetDropDown = () => {
+    const resetDropDown = (e) => {
+        e.preventDefault();
+        setDropArr([]);
         setDropDownVal(initial)
     }
 
@@ -56,7 +63,8 @@ const App = () => {
         console.log('dropDownVal is ', dropDownVal.selectedKey);
         console.log(' dropDownVal ', dropDownVal);
         setDropArr([...dropArr, {name: dropDownVal.selectedKey} ]);
-        resetDropDown();
+        setDropDownVal(initial);
+        // resetDropDown(e);
         }
 
     }
@@ -87,17 +95,6 @@ const App = () => {
 
     }
 
-    // const ValuesCard = ({val, index}) => {
-    // // const {id, name, nickname, description, thumbnail, img} = val;
-    //     return (
-    //         <Card key = {index} fluid>      
-    //             <Card.Content key = {index}>     
-    //                 <Label ribbon>  {val.name} </Label>                                 
-    //             </Card.Content>
-    //         </Card>
-    //     ) 
-    // } 
-
     let valsFound = searchVal ? fuse.search(searchVal) : dropArr;
     let foundLength = dropArr.length;
 
@@ -120,14 +117,13 @@ const App = () => {
         // })
     }
 
-    useEffect(()=>{
-        console.log('dropArr is ', dropArr);
-    },[dropArr, radioChosen])
+    // useEffect(()=>{
+    //     console.log('dropArr is ', dropArr);
+    // },[dropArr, radioChosen])
 
   return (
     
     <div  style = {{ border: `1px solid seagreen`, margin: `30px`, padding: `30px`}} >
-
 
         <Card.Group centered itemsPerRow={2}>
             <Card style = {{border: '1px solid brown', width: 'auto'}} >
@@ -135,7 +131,6 @@ const App = () => {
                     <Label style = {{lineHeight: `1.5`}}> Hooks + Fuse </Label>
                 </Card.Content>
             </Card>    
-
 
             <Card style = {{border: '1px solid brown', width: 'auto'}}  fluid >
                 <Card.Content>
@@ -149,27 +144,34 @@ const App = () => {
                 label = { "Current dropdown array: " + radioChosen }
             />
 
-            <FormField>
-                <Radio
-                    label = "Medium - Low - High"
-                    name = "radioChoice"
-                    value = 'mlh'
-                    checked = {radioChosen === 'mlh'}
-                    onChange = {handleRadio}
-                />
-            </FormField>
-            <FormField>
-                <Radio
-                    label = "U.S. States"
-                    name = "radioChoice"
-                    value = 'states'
-                    checked = {radioChosen === 'states'}
-                    onChange = {handleRadio}
-                />
-            </FormField>        
+            <Segment compact>
+                <Header color = 'blue'> Semantic UI React</Header>
+                <Form.Field>
+                    <Form.Radio
+                        label = "Medium - Low - High"
+                        name = "radioChoice"
+                        value = 'mlh'
+                        checked = {radioChosen === 'mlh'}
+                        onChange = {handleRadio}
+                    />
+                </Form.Field>
+                <Form.Field>
+                    <Form.Radio
+                        label = "U.S. States"
+                        name = "radioChoice"
+                        value = 'states'
+                        checked = {radioChosen === 'states'}
+                        onChange = {handleRadio}
+                    />
+                </Form.Field>            
+            </Segment>    
         </Form>
-
-        <form style = {{width: '20%'}}>
+                        
+        <Segment compact>
+        <form>
+               
+            
+            
             <Select 
                 styles = {customStyles}
                 name = "myDropDown"
@@ -178,12 +180,20 @@ const App = () => {
                 getOptionValue={({ value }) => value}
                 onChange={({ value }) => updateDropDown(value)}
                 options={options}
-            />
-        
-            <Button value = "Reset dropdown" onClick = {resetDropDown}> Reset </Button>
-            <Button type = 'select' onClick = {handleSubmit}> Submit </Button>
-        </form>
+            />        
+            
+        {/*  Using Button causes refresh  */}
+             <Button color = 'red'size = 'mini' onClick = {() => resetDropDown()}> Reset refreshes </Button>
+        {/*  Using Button NO Refresh */}
+            <Button color = 'pink' size = 'mini' onClick = {resetDropDown}> Reset </Button>
+            <Button color = 'pink' size = 'mini' onClick = {(e) => resetDropDown(e)}> Reset </Button>
+        {/*    <Input type = "button"  color = 'pink'  value = "Reset dropdown better" onClick = {resetDropDown} />    */}
+            <Button color = 'facebook' size = 'mini' type = 'select' onClick = {handleSubmit}> Submit </Button> 
 
+
+        </form>    
+        </Segment> 
+            
         <Label style = {{margin: '3px'}}> Dropdown selections : </Label>
         { valsFound.length
             ? 
@@ -196,8 +206,7 @@ const App = () => {
                 </Card.Group>
             :
                 null 
-        }    
-      
+        }          
 
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Appold from './App'
 import * as serviceWorker from './serviceWorker';
 import {StateInspector} from 'reinspect';
 
@@ -9,7 +10,7 @@ import {StateInspector} from 'reinspect';
 function Wrapper() {
     return (
         <StateInspector>
-            <App/>
+            <Appold/>
         </StateInspector>
     )
 }
