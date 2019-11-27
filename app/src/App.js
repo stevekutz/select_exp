@@ -181,7 +181,7 @@ const App = () => {
                 onChange={({ value }) => updateDropDown(value)}
                 options={options}
             />        
-            
+        <Segment>  
         {/*  Using Button causes refresh  */}
              <Button color = 'red'size = 'mini' onClick = {() => resetDropDown()}> Reset refreshes </Button>
         {/*  Using Button NO Refresh */}
@@ -189,7 +189,7 @@ const App = () => {
             <Button color = 'pink' size = 'mini' onClick = {(e) => resetDropDown(e)}> Reset </Button>
         {/*    <Input type = "button"  color = 'pink'  value = "Reset dropdown better" onClick = {resetDropDown} />    */}
             <Button color = 'facebook' size = 'mini' type = 'select' onClick = {handleSubmit}> Submit </Button> 
-
+        </Segment> 
 
         </form>    
         </Segment> 
@@ -197,13 +197,13 @@ const App = () => {
         <Label style = {{margin: '3px'}}> Dropdown selections : </Label>
         { valsFound.length
             ? 
-                <Card.Group centered itemsPerRow={ foundLength || 1 }>
-                {valsFound.map((val, index) => (
-                    <Card key = {index}>
-                        <ValuesCard index = {index} val = {val}/>
-                    </Card>                                            
+            <Segment raised>
+                <Card.Group itemsPerRow= { 5 }>
+                {valsFound.map((val, index) => (               
+                        <ValuesCard index = {index} val = {val}/>                                                   
                 ))}
                 </Card.Group>
+            </Segment>
             :
                 null 
         }          
@@ -214,3 +214,12 @@ const App = () => {
 
 export default App;
 
+/*
+                <Card.Group itemsPerRow= { 5 }>
+                {valsFound.map((val, index) => (
+                    <Card key = {index}>
+                        <ValuesCard index = {index} val = {val}/>
+                    </Card>                                            
+                ))}
+                </Card.Group>
+*/
