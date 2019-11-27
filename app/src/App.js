@@ -199,8 +199,8 @@ const App = () => {
             ? 
             <Segment raised>
                 <Card.Group itemsPerRow= { 5 }>
-                {valsFound.map((val, index) => (               
-                        <ValuesCard index = {index} val = {val}/>                                                   
+                {valsFound.map((val, index) => (                  
+                        <ValuesCard index = {index} val = {val}/>                                                                          
                 ))}
                 </Card.Group>
             </Segment>
@@ -213,13 +213,3 @@ const App = () => {
 }
 
 export default App;
-
-/*
-                <Card.Group itemsPerRow= { 5 }>
-                {valsFound.map((val, index) => (
-                    <Card key = {index}>
-                        <ValuesCard index = {index} val = {val}/>
-                    </Card>                                            
-                ))}
-                </Card.Group>
-*/
