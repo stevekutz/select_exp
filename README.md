@@ -10,7 +10,7 @@
         ~~~ html 
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm semantic-ui@2.4.2/dist/semantic.min.css" />
         ~~~
-    - Inside of of `src/index.js`, you must add this as the first line in order to properly initialize `Global state`
+    - To utilize `ReactN DevTools`, you must add this as the first line in order to properly initialize `Global state` inside of `src/index.js`
         ~~~ js
         import { setGlobal } from 'reactn';
         ~~~
@@ -18,4 +18,13 @@
         ~~~ js
         import addReactNDevTools from 'reactn-devtools';
         addReactNDevTools();
+        ~~~
+    To utilize the `redux devtools extension` with 'hooks, add the following to `src/index.js`
+        import `StateInspector`
+        ~~~
+        import { StateInspector } from 'reinspect';
+        ~~~
+        Define a `Wrapper` component and wrap the `App` component 
+        ~~~
+
         ~~~

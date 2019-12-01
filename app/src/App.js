@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, Fragment} from 'react';
 // import logo from './logo.svg';
 import Fuse from 'fuse.js';
 import {useState} from 'reinspect';
 import Select from 'react-select';
-import {Button, Card, Container, Content, Form, Grid, Header, Input, Label, Radio, Segment} from 'semantic-ui-react';
+import {Button, Card, Checkbox, Container, Content, Form, Grid, Header, Input, Label, Radio, Segment} from 'semantic-ui-react';
 import { Chip } from 'react-rainbow-components';
 import './App.css';
 
@@ -33,7 +33,7 @@ let options = mlh;
 
 const App = () => {
     const initial = {selectedKey: null};
-    // const [checked, setChecked] = useState(true, "RadioSelected");
+
     const [options, setOptions] = useState(mlh, "Options Array") 
 
     const [radioChosen, setRadioChosen] = useState( 'mlh', "RadioChoice")
@@ -45,6 +45,15 @@ const App = () => {
     const [searchVal, searchValues] = useState('');
     let valuesFound = fuse.search(searchVal);
     // let foundVals = valuesFound.length
+
+    const [checkedArr, toggleCheckedArr] = useState([], "ToggleCheckedArr");
+    const [checkedVal, setCheckedVal] = useState(true, "CheckedVal");
+
+    const  handleChecked = (checkedVal) => {
+        console.log("handler called ");
+        setCheckedVal(!checkedVal)
+
+    }
 
     const updateDropDown = value => {
         setDropDownVal({...dropDownVal, selectedKey: value});  
@@ -117,9 +126,10 @@ const App = () => {
         // })
     }
 
-    // useEffect(()=>{
-    //     console.log('dropArr is ', dropArr);
-    // },[dropArr, radioChosen])
+    useEffect(()=>{
+    //    console.log('dropArr is ', dropArr);
+        console.log("checked via handler is ", checkedVal);
+    },[checkedVal])
 
   return (
     
@@ -199,10 +209,17 @@ const App = () => {
             ? 
             <Segment raised>
                 <Card.Group itemsPerRow= { 5 }>
-                {valsFound.map((val, index) => (                  
-                        <ValuesCard index = {index} val = {val}/>                                                                          
+                {valsFound.map((val, index) => (                 
+                        <ValuesCard 
+                            key = {index} 
+                            val = {val}  
+                            checkedVal = {checkedVal} 
+                            handleChecked = {handleChecked} 
+                            setCheckedVal = {setCheckedVal}
+                        />                                                                            
                 ))}
                 </Card.Group>
+
             </Segment>
             :
                 null 
