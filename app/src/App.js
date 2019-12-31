@@ -126,10 +126,10 @@ const App = () => {
         // })
     }
 
-    useEffect(()=>{
-    //    console.log('dropArr is ', dropArr);
-        console.log("checked via handler is ", checkedVal);
-    },[checkedVal])
+    // useEffect(()=>{
+    // //    console.log('dropArr is ', dropArr);
+    //     console.log("checked via handler is ", checkedVal);
+    // },[checkedVal])
 
   return (
     
@@ -214,7 +214,7 @@ const App = () => {
                             key = {index} 
                             val = {val}  
                             checkedVal = {checkedVal} 
-                            handleChecked = {handleChecked} 
+                            // handleChecked = {handleChecked} 
                             setCheckedVal = {setCheckedVal}
                         />                                                                            
                 ))}

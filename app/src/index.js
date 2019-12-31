@@ -10,7 +10,7 @@ import {StateInspector} from 'reinspect';
 function Wrapper() {
     return (
         <StateInspector>
-            <Appold/>
+            <App/>
         </StateInspector>
     )
 }
